@@ -18,7 +18,7 @@ def health_check():
 
 app.include_router(home.router)
 app.include_router(product.router)
-app.include_router(search.router)
+
 
 if __name__ == "__main__":
     import uvicorn
