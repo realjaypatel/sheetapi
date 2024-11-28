@@ -3,3 +3,4 @@ pymongo
 uvicorn
 jinja2
 numpy
+pandas
