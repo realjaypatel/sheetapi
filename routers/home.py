@@ -37,13 +37,14 @@ async def return_home(request: Request):
 @router.get('/api/{custom_string}', status_code=status.HTTP_200_OK)
 async def return_home(custom_string,gid: str = Query(None), id: str = Query(None)):
     id = custom_string
-    print('got a req : ',id)
 
     r = (f'https://docs.google.com/spreadsheets/d/{id}/export?format=csv')
+
     if gid:
         r = (f'https://docs.google.com/spreadsheets/d/{id}/export?format=csv&gid={gid}')
-    
+    print('r :',r)
     data = pd.read_csv(r)
+    print('data',data)
     data.replace([np.inf, -np.inf], np.nan, inplace=True)
     data = data.to_dict(orient='records')
     print(data)
