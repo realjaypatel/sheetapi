@@ -42,11 +42,13 @@ async def return_home(custom_string,gid: str = Query(None), id: str = Query(None
 
     if gid:
         r = (f'https://docs.google.com/spreadsheets/d/{id}/export?format=csv&gid={gid}')
-    print('r :',r)
+    print('step: 1')
     data = pd.read_csv(r)
+    data = data.fillna('')
+    print('step: 2')
     print('data',data)
     data.replace([np.inf, -np.inf], np.nan, inplace=True)
     data = data.to_dict(orient='records')
-    print(data)
+
     return JSONResponse(content=data)
 
