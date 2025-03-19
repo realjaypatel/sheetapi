@@ -8,7 +8,6 @@ from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
-
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
