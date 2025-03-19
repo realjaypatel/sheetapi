@@ -36,19 +36,24 @@ async def return_home(request: Request):
 
 @router.get('/api/{custom_string}', status_code=status.HTTP_200_OK)
 async def return_home(custom_string,gid: str = Query(None), id: str = Query(None)):
-    id = custom_string
+    try:
+        id = custom_string
 
-    r = (f'https://docs.google.com/spreadsheets/d/{id}/export?format=csv')
+        r = (f'https://docs.google.com/spreadsheets/d/{id}/export?format=csv')
 
-    if gid:
-        r = (f'https://docs.google.com/spreadsheets/d/{id}/export?format=csv&gid={gid}')
-    print('step: 1')
-    data = pd.read_csv(r)
-    data = data.fillna('')
-    print('step: 2')
-    print('data',data)
-    data.replace([np.inf, -np.inf], np.nan, inplace=True)
-    data = data.to_dict(orient='records')
+        if gid:
+            r = (f'https://docs.google.com/spreadsheets/d/{id}/export?format=csv&gid={gid}')
+        print('step: 1')
+        data = pd.read_csv(r)
+        data = data.fillna('')
+        print('step: 2')
+        print('data',data)
+        data.replace([np.inf, -np.inf], np.nan, inplace=True)
+        data = data.to_dict(orient='records')
 
-    return JSONResponse(content=data)
+        return JSONResponse(content=data)
+    except :
+        return {'status':'error while loading Data'}
+
+
 
