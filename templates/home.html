@@ -157,8 +157,6 @@
                             document.getElementById('redirectForm').addEventListener('submit', function(event) {
                                 event.preventDefault();
                                 const url = document.getElementById('googleSheetUrl').value;
-                                const regex = /https:\/\/docs\.google\.com\/spreadsheets\/d\/([a-zA-Z0-9-_]+)\/edit\?gid=([0-9]+)/;
-                                const match = url.match(regex);
                     
     
                                     const spreadsheetId = match[1];
